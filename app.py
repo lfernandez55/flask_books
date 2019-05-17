@@ -112,3 +112,19 @@ def addbook():
 
     categories = execute_sql('SELECT * FROM Category ORDER BY description ASC')
     return render_template('addbook.html', categories=categories)
+
+@app.route('/categories')
+def categories():
+    categories = execute_sql('SELECT rowid, * FROM Category ORDER BY description ASC')
+    return render_template('categories.html', categories=categories)
+
+@app.route('/books_in_category/<categoryID>')
+def books_in_cat(categoryID):
+    categories = execute_sql('SELECT * FROM Category WHERE rowid = ? ',[categoryID])
+    categoryDescription= categories[0]['description']
+    books = execute_sql('SELECT * FROM Book WHERE category_id = ? ',[categoryID])
+    booksx = execute_sql('SELECT * FROM Books WHERE category_id = 1')
+    for book in books:
+        print('dddd')
+    print('debug')
+    return render_template('books_in_cat.html', books=books, categoryDescription=categoryDescription)

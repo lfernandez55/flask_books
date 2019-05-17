@@ -1,0 +1,10 @@
+<a href="{{ url_for('categories') }}" >Category</a>
+
+<h1>{{categoryDescription}}</h1>
+
+{% for book in books %}
+  <div>
+  {{ book['title']}} -- {{ book['author']}}
+  </div>
+
+{% endfor%}
