@@ -1,5 +1,5 @@
 1)python -m venv venv  (this installs the venv folder)
-2)venv\Scripts\activate.bat 
+2)venv\Scripts\activate.bat
 3)pip install Flask
 4)add basic app.py file
 
@@ -11,8 +11,9 @@ app = Flask(__name__)
 def hello_world():
    return 'Hello, World!'
 
+4.5) set FLASK_ENV=development  (so that server doesn't need to be restarted after every change)
 5)flask run
-(open browser on 5000)
+(open browser on 5000 -- to use a different port use "flask run --port 8080")
 
 -----------
 ADDING A TEMPLATE
