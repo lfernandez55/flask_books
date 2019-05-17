@@ -1,6 +1,6 @@
 import sqlite3
 from flask import Flask, render_template, g, request, redirect, url_for
-
+from pprint import pprint
 PATH = 'db/books.sqlite'
 
 app = Flask(__name__)
@@ -95,18 +95,20 @@ def addbook():
         description = request.form['description']
         category_field = request.form['category']
 
-
-        # categoryID = execute_sql('SELECT rowid, * FROM Category ')
         categoryID = execute_sql('SELECT rowid, * FROM Category WHERE description = ? ',[category_field])
         if len(categoryID) == 0:
             returnStatus = execute_sql('INSERT INTO Category (description) VALUES (?)',[category_field],commit=True)
-            categoryID = execute_sql('SELECT rowid, * FROM Category WHERE description = ? ',[category_field])
+            returnQuery = execute_sql('SELECT last_insert_rowid()')
+            categoryID = returnQuery[0][0]
+            # or, instead of above two lines use this one instead:
+            # categoryID = execute_sql('SELECT rowid, * FROM Category WHERE description = ? ',[category_field])
         else:
-        categoryID = categoryID[0]['rowid']
+            categoryID = categoryID[0]['rowid']
 
         returnStatus = execute_sql('INSERT INTO Book (author, title, isbn, description, category_id) VALUES (?, ?, ?, ?, ?)',
         (author, title, isbn, description, categoryID),commit=True)
 
         return redirect(url_for('home'))
 
-    return render_template('addbook.html')
+    categories = execute_sql('SELECT * FROM Category ORDER BY description ASC')
+    return render_template('addbook.html', categories=categories)

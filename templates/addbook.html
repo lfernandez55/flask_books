@@ -20,8 +20,9 @@
       <label >Category</label>
       <input list="categories" name="category">
       <datalist id="categories">
-        <option value="Horror">
-        <option value="Sociology">
+          {% for category in categories %}
+            <option value="{{category['description']}}">
+          {% endfor%}
       </datalist>
     </div>
     <div>
