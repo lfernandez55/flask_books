@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template, g
+from flask import Flask, render_template, g, request, redirect, url_for
 
 PATH = 'db/books.sqlite'
 
@@ -86,20 +86,27 @@ def db_admin():
     sqlQuery = execute_sql('CREATE TABLE IF NOT EXISTS Category (description TEXT)',commit=True)
 
 
-# @app.route('/employer/<employer_id>/review', methods={'GET','POST'})
-# def review(employer_id):
-#     if request.method == 'POST':
-#         review = request.form['review']
-#         rating = request.form['rating']
-#         title = request.form['title']
-#         status = request.form['status']
-#
-#         # to pass pluralsight qa the following line needs to be datetime.datetime.now().strftime("%m/%d/%Y")
-#         # but to actually run the code without error it has to be datetime.now().strftime("%m/%d/%Y")
-#         date = datetime.now().strftime("%m/%d/%Y")
-#         returnStatus = execute_sql('INSERT INTO review (review, rating, title, date, status, employer_id) VALUES (?, ?, ?, ?, ?, ?)',
-#         (review, rating, title, date, status, employer_id),commit=True)
-#
-#         return redirect(url_for('employer', employer_id=employer_id))
-#
-#     return render_template('review.html', employer_id=employer_id)
+@app.route('/addbook', methods={'GET','POST'})
+def addbook():
+    if request.method == 'POST':
+        author = request.form['author']
+        title = request.form['title']
+        isbn = request.form['isbn']
+        description = request.form['description']
+        category_field = request.form['category']
+
+
+        # categoryID = execute_sql('SELECT rowid, * FROM Category ')
+        categoryID = execute_sql('SELECT rowid, * FROM Category WHERE description = ? ',[category_field])
+        if len(categoryID) == 0:
+            returnStatus = execute_sql('INSERT INTO Category (description) VALUES (?)',[category_field],commit=True)
+            categoryID = execute_sql('SELECT rowid, * FROM Category WHERE description = ? ',[category_field])
+        else:
+        categoryID = categoryID[0]['rowid']
+
+        returnStatus = execute_sql('INSERT INTO Book (author, title, isbn, description, category_id) VALUES (?, ?, ?, ?, ?)',
+        (author, title, isbn, description, categoryID),commit=True)
+
+        return redirect(url_for('home'))
+
+    return render_template('addbook.html')

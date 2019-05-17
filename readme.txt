@@ -75,3 +75,17 @@ This creates the db/books.sqlite db (look in the directory structure)
 
 -------------
 ADD SOME TABLES
+
+Decorators
+https://www.python-course.eu/python3_decorators.php
+
+jinja2 stuff in all_books.html
+  conditionals
+  length of a list
+  setting variables
+  setting variables inside loops
+  https://stackoverflow.com/questions/9486393/jinja2-change-the-value-of-a-variable-inside-a-loop
+
+--------------
+addbook.html
+request, redirect, url_for

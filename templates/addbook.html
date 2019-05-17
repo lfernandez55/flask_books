@@ -1,0 +1,30 @@
+  <h1>New Book</h1>
+  <form method="post">
+    <div>
+      <label >Author</label>
+      <input type="text" name="author" required value="aaa">
+    </div>
+    <div>
+      <label >Title</label>
+      <input type="text" name="title" required value="ttt">
+    </div>
+    <div>
+      <label >isbn</label>
+      <input type="text" name="isbn" required value="iii">
+    </div>
+    <div>
+      <label >Description</label>
+      <textarea  name="description" required>dddd</textarea>
+    </div>
+    <div>
+      <label >Category</label>
+      <input list="categories" name="category">
+      <datalist id="categories">
+        <option value="Horror">
+        <option value="Sociology">
+      </datalist>
+    </div>
+    <div>
+      <input type="submit">
+    </div>
+  </form>
