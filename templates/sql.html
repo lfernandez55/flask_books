@@ -1,0 +1,16 @@
+<a href="{{ url_for('home') }}" >Home</a>
+
+<h1>Run SQL</h1>
+<form method="post">
+  <div>
+    <label >SQL:</label>
+    <textarea  name="sqlField" required>SELECT * FROM Book</textarea>
+  </div>
+  <div>
+    <input type="submit">
+  </div>
+</form>
+
+<pre>
+{{data}}
+</pre>

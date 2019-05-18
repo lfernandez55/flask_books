@@ -44,8 +44,8 @@ def books():
     print(len(books))
     return render_template('all_books.html', books=books)
 
-@app.route('/sql')
-def sql():
+@app.route('/seedDB')
+def seedDB():
     # sqlQ = execute_sql('DROP TABLE IF EXISTS Book',commit=True)
     # sqlQ = execute_sql('DROP TABLE IF EXISTS Category',commit=True)
     #
@@ -123,8 +123,60 @@ def books_in_cat(categoryID):
     categories = execute_sql('SELECT * FROM Category WHERE rowid = ? ',[categoryID])
     categoryDescription= categories[0]['description']
     books = execute_sql('SELECT * FROM Book WHERE category_id = ? ',[categoryID])
-    booksx = execute_sql('SELECT * FROM Books WHERE category_id = 1')
     for book in books:
         print('dddd')
     print('debug')
     return render_template('books_in_cat.html', books=books, categoryDescription=categoryDescription)
+
+@app.route('/sql', methods={'GET','POST'})
+def sql():
+    data=""
+    if request.method == 'POST':
+        sqlField = request.form['sqlField']
+        try:
+            returnVar = execute_sql(sqlField,commit=True)
+        except:
+            data="An error occurred. . .look in the console"
+        else:
+            try:
+                for row in returnVar:
+                    print('')
+                    print(type(row))
+                    rowAsDict = dict(row)
+                    print(type(rowAsDict))
+                    data = data + "\n"
+                    for key, value in rowAsDict.items():
+                        print(key, ":", value)
+                        data= data + key + ":" + str(value) + "\n"
+            except:
+                data="Data returned from sql was not iterable"
+        return render_template('sql.html',data=data)
+
+    return render_template('sql.html',data=data)
+
+
+
+@app.route('/tinker')
+def tinker():
+    #iterating through a list of dictionaries (equivalent in js to iterating through an array of objects)
+    mylist = [{'fname':'Luke','lname':'Fernandez'},{'fname':'Susan','lname':'Matt'}]
+    print('=============================================')
+    for item in mylist:
+        print('')
+        print(item)
+        print(type(item))
+        for key, value in item.items():
+            print(key, ":", value)
+
+    #iterating thru list.  with each item in list convert to dictionary and then iterate through the dictionary
+    print('++++++++++++++++++++++++++++++++++++++++++++++')
+    books = execute_sql('SELECT rowid, * FROM Book')
+    for row in books:
+        print('')
+        print(type(row))
+        rowAsDict = dict(row)
+        print(type(rowAsDict))
+        for key, value in rowAsDict.items():
+            print(key, ":", value)
+
+    return '<h1>Tinker function executed, check console</h1>'
