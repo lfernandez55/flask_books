@@ -1,6 +1,14 @@
-<a href="{{ url_for('home') }}" >Home</a>
+{% extends "base.html" %}
 
-<h1>All Books</h1>
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+  <li class="breadcrumb-item active">All Books</li>
+{% endblock %}
+
+
+{% block page_content %}
+
 {#
   NOTE: One has to use namespaces to keep a variable from reverting inside a loop
   https://stackoverflow.com/questions/9486393/jinja2-change-the-value-of-a-variable-inside-a-loop
@@ -20,3 +28,5 @@
 {% if books|length == 0 %}
 <h2>The DB Is Empty: Have You Seeded It?</h2>
 {% endif %}
+
+{% endblock %}

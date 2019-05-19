@@ -1,13 +1,13 @@
 import sqlite3
 from flask import Flask, render_template, g, request, redirect, url_for
 from pprint import pprint
+from flask_bootstrap import Bootstrap
+
 PATH = 'db/books.sqlite'
 
 app = Flask(__name__)
 
-# @app.route('/')
-# def hello_world():
-#     return 'Hello, World!'
+bootstrap = Bootstrap( app)
 
 def open_connection():
     connection = getattr(g, '_connection', None)
@@ -134,7 +134,7 @@ def sql():
     if request.method == 'POST':
         sqlField = request.form['sqlField']
         try:
-            returnVar = execute_sql(sqlField,commit=True)
+            returnVar = execute_sql(sqlField)
         except:
             data="An error occurred. . .look in the console"
         else:
@@ -149,7 +149,7 @@ def sql():
                         print(key, ":", value)
                         data= data + key + ":" + str(value) + "\n"
             except:
-                data="Data returned from sql was not iterable"
+                 data="Data returned from sql was not iterable"
         return render_template('sql.html',data=data)
 
     return render_template('sql.html',data=data)
@@ -180,3 +180,7 @@ def tinker():
             print(key, ":", value)
 
     return '<h1>Tinker function executed, check console</h1>'
+
+@app.route('/tinker_extends')
+def tinker_extends():
+    return render_template('tinker_extends.html')

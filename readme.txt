@@ -89,3 +89,26 @@ jinja2 stuff in all_books.html
 --------------
 addbook.html
 request, redirect, url_for
+
+---------------
+Categories
+Book_in_cat  (first use of parameter in url route)
+SQL  (allows dynamic creation of SQL, also shows how query can be dumped by turning
+each row into a dictionary and then iterating through the dictionary)
+
+---------------
+SQLLite3
+Download from https://www.sqlite.org/download.html
+Extract sqlite3.exe from zip
+Copy db (books.sqllite) and place in same directory as exe
+C:\Users\lfernandez\Downloads\junk\sqlite-tools-win32-x86-3280000>sqlite3 books.sqlite
+run sql commands like:
+sqlite> select * from category;
+Horror
+Sociology
+sqlite> select * from book;
+Mary Shelly|Frankenstein|1|A horror story written by a romantic.|1
+Henry James|The Turn of the Screw|2|Another British horror story.|1
+Max Weber|The Protestant Work Ethic and The Spirit of Capitalism|3|A classic early 20th C. sociology text|2
+Robert Putnam|Bowling Alone|4|A classic late 20th C. sociology test|2
+sqlite>

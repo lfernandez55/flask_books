@@ -1,8 +1,12 @@
-<h1>Books, books, books!</h1>
-<a href="{{ url_for('seedDB') }}" >Seed Database</a> |
-<a href="{{ url_for('eraseDB') }}" >Erase Database</a> |
-<a href="{{ url_for('books') }}" >All Books</a> |
-<a href="{{ url_for('addbook') }}" >New Book</a> |
-<a href="{{ url_for('categories') }}" >Categories</a> |
-<a href="{{ url_for('tinker') }}" >Tinker</a> |
-<a href="{{ url_for('sql') }}" >SQL</a>
+{% extends "base.html" %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item">Home</li>
+{% endblock %}
+
+
+{% block page_content %}
+  <h1>Welcome to Fine Books!</h1>
+{% endblock %}
