@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template, g, request, redirect, url_for
+from flask import Flask, render_template, g, request, redirect, url_for, jsonify
 from pprint import pprint
 from flask_bootstrap import Bootstrap
 
@@ -184,3 +184,22 @@ def tinker():
 @app.route('/tinker_extends')
 def tinker_extends():
     return render_template('tinker_extends.html')
+
+@app.route('/tinker_json')
+def bar():
+    # see https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
+    tasks = [
+    {
+        'id': 1,
+        'title': u'Buy groceries',
+        'description': u'Milk, Cheese, Pizza, Fruit, Tylenol',
+        'done': False
+    },
+    {
+        'id': 2,
+        'title': u'Learn Python',
+        'description': u'Need to find a good Python tutorial on the web',
+        'done': False
+    }
+    ]
+    return jsonify({'tasks': tasks})

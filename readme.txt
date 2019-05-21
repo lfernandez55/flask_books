@@ -112,3 +112,16 @@ Henry James|The Turn of the Screw|2|Another British horror story.|1
 Max Weber|The Protestant Work Ethic and The Spirit of Capitalism|3|A classic early 20th C. sociology text|2
 Robert Putnam|Bowling Alone|4|A classic late 20th C. sociology test|2
 sqlite>
+
+----------------
+User authentication
+
+no roles:
+https://flask-user.readthedocs.io/en/latest/quickstart_app.html
+See repo https://github.com/lfernandez55/flask-quickstart
+
+roles: (basic app):
+https://flask-user.readthedocs.io/en/latest/basic_app.html
+
+Organized structure:
+https://github.com/lingthio/Flask-User-starter-app
