@@ -114,7 +114,7 @@ Robert Putnam|Bowling Alone|4|A classic late 20th C. sociology test|2
 sqlite>
 
 ----------------
-User authentication
+User authenticationsql
 
 no roles:
 https://flask-user.readthedocs.io/en/latest/quickstart_app.html
