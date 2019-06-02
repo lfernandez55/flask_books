@@ -9,20 +9,38 @@ class TestApp:
         assert res.status_code == 200
         assert b"Fum" in res.data, "Problem!!!"
 
-    def test_bar(self, client):
-        res = client.get(url_for('bar'))
+    def test_erase_db(self, client):
+        res = client.get(url_for('eraseDB'))
         assert res.status_code == 200
-        # assert res.json == {'ping': 'pong'}
+        assert b"Erased" in res.data, "Problem in eraseDB; not returning 'Erased'"
 
-    def test_books(self, client):
+    def test_seed_db(self, client):
+        res = client.get(url_for('seedDB'))
+        assert res.status_code == 200
+        assert b"Seeded" in res.data, "Problem in seedDB; not returning 'Seeded'"
+
+    def test_tinker(self, client):
+        res = client.get(url_for('tinker'))
+        assert res.status_code == 200
+        assert b"Tinker" in res.data, "Problem in tinker; not returning 'Tinker'"
+
+    def test_sql(self, client):
+        res = client.get(url_for('sql'))
+        assert res.status_code == 200
+        assert b"Custom SQL" in res.data, "Problem in sql; not returning 'Custom SQL'"
+
+    # this won't work if the test_erase and test_seed_db are out of sequence
+    def test_all_books(self, client):
         res = client.get(url_for('books'))
         assert res.status_code == 200
-        assert b"Frankenstein" in res.data, "Problem in test_books!!!"
+        assert b"Frankenstein" in res.data, "Problem in All Books; not returning 'Frankenstein' "
 
-    # def test_ping_false_positive(self, client):
-    #     res = client.get(url_for('ping'))
-    #     assert res.status_code == 400, 'Request ping did not result in a 400 error'
+    def test_new_book(self, client):
+            res = client.get(url_for('addbook'))
+            assert res.status_code == 200
+            assert b"Description" in res.data, "Problem in New Book. Not returning 'Description'"
 
-    # def test_home_page(self, client):
-    #     res = client.get(url_for('tinker_json'))
-    #     assert res.status_code == 200
+    def test_new_book(self, client):
+            res = client.get(url_for('categories'))
+            assert res.status_code == 200
+            assert b"Horror" in res.data, "Problem in Categories. Not returning 'Horror'"

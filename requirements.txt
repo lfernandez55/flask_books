@@ -5,7 +5,6 @@ colorama==0.4.1
 dominate==2.3.5
 Flask==1.0.2
 Flask-Bootstrap==3.3.7.1
-flask-pytest==0.0.5
 Flask-SQLAlchemy==2.4.0
 importlib-metadata==0.17
 itsdangerous==1.1.0

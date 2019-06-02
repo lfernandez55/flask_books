@@ -40,7 +40,7 @@ def create_app():
 
     @app.route('/')
     def home():
-        db_admin()
+        # db_admin()
         return render_template('index.html')
 
     @app.route('/all_books')
